@@ -1,7 +1,5 @@
 package org.example;
 
-import java.util.Objects;
-
 public class Node {
 
     private int value1;
@@ -12,12 +10,12 @@ public class Node {
      * Konstruktor przyjmujacy wszystkie argumenty
      * @param value1 wspolczynnik
      * @param value2 wykladnik potegi
-     * @param next nastepny element w liscie
+     * next nastepny element w liscie
      */
-    public Node(int value1, int value2, Node next){
+    public Node(int value1, int value2){
         this.value1 = value1;
         this.value2 = value2;
-        this.next = next;
+        this.next = null;
     }
 
     public void setNext (Node next){
@@ -29,35 +27,21 @@ public class Node {
     }
 
     /**
-     * metoda generuje stringa reprezentujacego mian-element wielomianu w czytelnym formacie
-     * @return string w formacie +value1 X:pow value2
+     * metoda generuje string reprezentujacego mian-element wielomianu w czytelnym formacie
+     * @return string w formacie +value1 X^ value2
      */
     public String generatePolynomial() {
-        String znak = value2 == 0 ? "" : "X";
+        String znak = value2 == 0 ? "" : "x";
         String result = "";
 
         result = value1 + " ";
         if (!znak.isEmpty()) {
-            result = value1 + znak + ":pow" + value2 + " ";
+            result = value1 + znak + "^" + value2 + " ";
         }
         if (value1 > 0) {
-            result = "+" + result;
+            result = "+ " + result;
         }
         return result;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Node)) return false;
-        Node node = (Node) o;
-        return value1 == node.value1 &&
-                value2 == node.value2;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value1, value2);
     }
 
     @Override
@@ -65,6 +49,16 @@ public class Node {
         return "Node{" +
                 "value1=" + value1 +
                 ", value2=" + value2 +
+                ",    Nextvalue1=" + next.getValue1() +
+                ",    Nextvalue2=" + next.getValue2() +
                 '}';
+    }
+
+    public int getValue1() {
+        return value1;
+    }
+
+    public int getValue2() {
+        return value2;
     }
 }

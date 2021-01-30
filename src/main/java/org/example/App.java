@@ -9,12 +9,18 @@ public class App {
         circularList.add(5, 6);
         circularList.add(-25, 0);
         circularList.add(99, 3);
+
         circularList.display();
-//        circularList.deleteLast();
+        System.out.println("");
+
+        circularList.displayPolynomial();
+        circularList.deleteLast();
+        System.out.println("wywołanie metody: circularList.deleteLast();");
 //        circularList.deleteLast();
 //        circularList.deleteLast();
 //        circularList.display();
 //        circularList.displayLast();
         circularList.displayPolynomial();
+
     }
 }
