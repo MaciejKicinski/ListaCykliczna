@@ -10,7 +10,6 @@ public class CircularList {
     public CircularList() {
         head = new Node(0, -1);
         head.setNext(head);
-
     }
 
     /**
@@ -42,42 +41,13 @@ public class CircularList {
             System.out.println("lista bez wielomianu");
             return;
         }
-        Node last = getLast();
-        Node current = head.getNext();
-        {
-            while (!(current.getNext() == (last))) {
-                current = current.getNext();
-            }
+        Node prev = head.getNext();
+        while (prev.getNext() != head) {
+            prev = prev.getNext();
         }
-        current.setNext(head);
-    }
-
-    /**
-     * wyświetla ostatni element na liscie
-     */
-    public void displayLast() {
-        if (head.getNext() == head) {
-            System.out.println("lista jest pusta");
-        } else {
-            System.out.println(head.toString());
-            }
-        }
-
-    /**
-     * metoda zwroca ostatni element na liscie
-     *
-     * @return Node - ostatni w liscie
-     */
-    public Node getLast() {
-        Node current = head;
-        if (head.getNext() == head) {
-            System.out.println("lista jest pusta");
-        } else {
-            while (!(current.getNext() == (head))) {
-                current = current.getNext();
-            }
-        }
-        return current;
+        prev.setNext(head.getNext());
+        head = prev;
+        return;
     }
 
     /**
@@ -97,13 +67,28 @@ public class CircularList {
     /**
      * wyświetla ciag wielomianu w czytelnym formacie
      */
-    public void displayPolynomial() {
-        StringBuilder stringBuilder = new StringBuilder();
+
+    public String displayPolynomial() {
+        StringBuilder result = new StringBuilder();
         Node current = head;
+        current = current.getNext();
         do {
-            stringBuilder.append(current.getNext().generatePolynomial());
+            if (current.getValue1() != 0) {
+                result.append(current.generatePolynomial());
+            }
             current = current.getNext();
-        } while (current != head);
-        System.out.println(stringBuilder.toString());
+        } while (current != head.getNext());
+        return result.toString();
+    }
+
+    public int returnNumberOfNodes() {
+        int result = 0;
+        Node current = head.getNext();
+        do {
+            result = result + 1;
+            current = current.getNext();
+        }
+        while (current != head);
+        return result;
     }
 }
